@@ -1,3 +1,5 @@
+require 'pry'
+
 class Game
   attr_accessor :board, :player_1, :player_2
   
@@ -26,6 +28,7 @@ class Game
   
   def won?
     WIN_COMBINATIONS.detect { |winner|
+    binding.pry
       @board.cells[winner[0]] == @board.cells[winner[1]] &&
       @board.cells[winner[1]] == @board.cells[winner[2]] &&
       @board.taken?(winner[0]+1)
@@ -74,48 +77,23 @@ class Game
   end
   
   def replay
-    print "Would you like to play again?"
+    print "Would you like to play again?\n"
     gets.strip
     
       if "Y" || "yes" || "Yes" || "YES"
-        then game.new.start
+        then Game.new.start
       elsif "N" || "no" || "No" || "NO"
         puts "Hope you had fun playing!!"
       else "exit"
         puts "Hope you had fun playing!!"
       end
+      
   end
-  
+
   def start
-    print "Please choose the mode of game which you would like to play:
-              0 = Computer against itself,
-              1 = You against the computer,
-              2 = You and another human.
-              
-              "
-    gets.strip.to_i
-
-    # mode = ["0 player", "1 player", "2 player"]
-    #   0 = mode[0]
-    #   1 = mode[1]
-    #   2 = mode[2]
-
-    # if code here about mode choice and @player_1 = Players:Computer || @player_1 = Players:Human && @player_2 = Players:Computer || @player_2 = Players:Human
-    
-    if gets.strip.to_i == "1" || gets.strip.to_i == "2" print "Which token would you like to play?
-             X or O
-             
-             "
-     token_choice = "X" or "O"
-     
-     gets.chomp
-     if gets.chomp.match == "X" then @player_1.token = "X"
-       else @player_1.token = "O"
-     end 
-    
-   
     self.play until over?
     self.replay
   end
+
 
 end

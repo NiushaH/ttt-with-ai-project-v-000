@@ -26,6 +26,8 @@ class Board
   end
   
   def full?
+    # how does line 30 work instead of if/else below?
+    # cells.all?{|token| token == "X" || token == "O"}
     if cells.all?{|character| character == "X" || character == "O"}
       true
     else
